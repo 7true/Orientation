@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Orientation</string>
+    <string name="getOrientation">get orientation</string>
 </resources>
