@@ -30,14 +30,15 @@
                     android:id="@+id/button1"
                     android:layout_height="wrap_content"
                     android:layout_width="match_parent"
-                    android:onClick="onClick"
+                    android:onClick="onClickOrientationButton"
                     android:text="@string/getOrientation"/>
 
                 <Button
                     android:id="@+id/button2"
                     android:layout_height="wrap_content"
                     android:layout_width="match_parent"
-                    android:text="Вторая кнопка"/>
+                    android:onClick="onClickRotateButton"
+                    android:text="@string/rotate"/>
             </TableRow>
 
             <TableRow>
