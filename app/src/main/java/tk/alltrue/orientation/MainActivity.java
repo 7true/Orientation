@@ -8,21 +8,26 @@ import android.view.Surface;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
     private Button mButton;
     static final String ORIENTATION_PORTRAIT = "portrait";
     static final String ORIENTATION_LANDSCAPE = "landscape";
-    boolean mState = false;
+    static boolean mState = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mButton = (Button) findViewById(R.id.button3);
-        mButton.setText(ORIENTATION_LANDSCAPE);
+        mButton = findViewById(R.id.button3);
+        if (getScreenOrientation().equals("Portrait orientation")) {
+            mButton.setText(ORIENTATION_LANDSCAPE);
+        } else {
+            mButton.setText(ORIENTATION_PORTRAIT);
+        }
     }
 
     private String getScreenOrientation() {
@@ -51,13 +56,13 @@ public class MainActivity extends AppCompatActivity {
 
     public void onClickOrientationButton(View view) {
         String orient = getScreenOrientation();
-        TextView or = (TextView) findViewById(R.id.textViewOrient);
+        TextView or = findViewById(R.id.textViewOrient);
         or.setText(orient);
     }
 
     public void onClickRotateButton (View view) {
         String rotation = getRotationOrientation();
-        TextView or = (TextView) findViewById(R.id.textViewOrient);
+        TextView or = findViewById(R.id.textViewOrient);
         or.setText(rotation);
     }
 
@@ -70,6 +75,19 @@ public class MainActivity extends AppCompatActivity {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
             mButton.setText(ORIENTATION_LANDSCAPE);
         }
-        mState = !mState;
+        mState =  !mState;
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        // Проверяем ориентацию экрана
+        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            recreate();
+            Toast.makeText(this, "landscape", Toast.LENGTH_SHORT).show();
+        } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
+            recreate();
+            Toast.makeText(this, "portrait", Toast.LENGTH_SHORT).show();
+        }
     }
 }
