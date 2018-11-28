@@ -83,10 +83,10 @@ public class MainActivity extends AppCompatActivity {
         super.onConfigurationChanged(newConfig);
         // Проверяем ориентацию экрана
         if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            recreate();
+            //recreate();
             Toast.makeText(this, "landscape", Toast.LENGTH_SHORT).show();
         } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
-            recreate();
+           // recreate();
             Toast.makeText(this, "portrait", Toast.LENGTH_SHORT).show();
         }
     }
